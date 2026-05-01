@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>StayFinder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 font-sans">
+
+<!-- Navbar -->
+<header class="sticky top-0 bg-white shadow-sm z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between p-4">
+    
+    <h1 class="text-2xl font-bold text-rose-500">StayFinder</h1>
+
+    <div class="hidden md:flex items-center border rounded-full px-4 py-2 shadow-md hover:shadow-lg transition">
+      <span class="px-3 text-sm">Anywhere</span>
+      <span class="border-l h-5"></span>
+      <span class="px-3 text-sm">Any week</span>
+      <span class="border-l h-5"></span>
+      <span class="px-3 text-sm text-gray-500">Add guests</span>
+      <button class="ml-3 bg-rose-500 text-white p-2 rounded-full hover:bg-rose-600 transition">
+        🔍
+      </button>
+    </div>
+
+    <button class="border px-4 py-2 rounded-full hover:shadow-md transition">
+      Login
+    </button>
+
+  </div>
+</header>
+
+<!-- Categories -->
+<section class="max-w-7xl mx-auto py-6">
+  <div class="flex justify-center gap-10 text-gray-600 text-sm">
+    <div class="flex flex-col items-center cursor-pointer hover:text-black">🏖 Beach</div>
+    <div class="flex flex-col items-center cursor-pointer hover:text-black">🏔 Mountain</div>
+    <div class="flex flex-col items-center cursor-pointer hover:text-black">🌆 City</div>
+    <div class="flex flex-col items-center cursor-pointer hover:text-black">⛺ Camping</div>
+  </div>
+</section>
+
+<!-- Property Grid -->
+<section class="max-w-7xl mx-auto px-4 pb-16">
+  <div id="cardContainer" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+  </div>
+
+  <div class="text-center mt-10">
+    <button onclick="loadMore()" 
+      class="bg-black text-white px-8 py-3 rounded-xl hover:bg-gray-800 transition">
+      Show More
+    </button>
+  </div>
+</section>
+
+<script>
+
+const properties = [
+  { title: "Maldives Beach House", price: 12000, rating: 4.8, img: "https://picsum.photos/600/400?1" },
+  { title: "Luxury Mountain Villa", price: 9500, rating: 4.6, img: "https://picsum.photos/600/400?2" },
+  { title: "City Apartment", price: 7000, rating: 4.4, img: "https://picsum.photos/600/400?3" },
+  { title: "Camping Retreat", price: 5000, rating: 4.5, img: "https://picsum.photos/600/400?4" }
+];
+
+function createCard(property) {
+  return `
+  <div class="bg-white rounded-2xl shadow-md hover:shadow-xl hover:-translate-y-1 transition duration-300 cursor-pointer">
+    
+    <div class="relative overflow-hidden rounded-t-2xl">
+      <img src="${property.img}" 
+           class="w-full h-56 object-cover hover:scale-110 transition duration-500">
+      <button class="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:scale-110 transition">
+        ❤️
+      </button>
+    </div>
+
+    <div class="p-4">
+      <div class="flex justify-between items-center">
+        <h2 class="font-semibold">${property.title}</h2>
+        <span class="text-sm">⭐ ${property.rating}</span>
+      </div>
+      <p class="text-gray-600 text-sm mt-1">₹${property.price} / night</p>
+    </div>
+
+  </div>
+  `;
+}
+
+function loadInitial() {
+  const container = document.getElementById("cardContainer");
+  properties.forEach(p => {
+    container.innerHTML += createCard(p);
+  });
+}
+
+function loadMore() {
+  const container = document.getElementById("cardContainer");
+
+  for (let i = 0; i < 4; i++) {
+    const randomProperty = {
+      title: "Luxury Stay",
+      price: 8000 + Math.floor(Math.random() * 5000),
+      rating: (4 + Math.random()).toFixed(1),
+      img: "https://picsum.photos/600/400?random=" + Math.floor(Math.random() * 1000)
+    };
+    container.innerHTML += createCard(randomProperty);
+  }
+}
+
+loadInitial();
+
+</script>
+
+</body>
+</html>
+
