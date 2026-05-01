@@ -9,7 +9,7 @@ A responsive Airbnb clone frontend built using HTML, CSS, and JavaScript. This p
 
 ## 🚀 Live Demo
 
-🔗 https://anuj-codess.github.io/airbnb-clone-frontend-project
+🔗 https://anuj-codess.github.io/airbnb-clone-frontend-project/index.html
 
 ---
 
